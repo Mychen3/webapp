@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+    <div v-if="standard>=90">优秀</div>
+    <div v-else-if="standard<90&&standard>80">良好</div>
+    <div v-else-if="standard<80&&standard>=60">一般</div>
+    <div v-else>很差</div>
+     //v-shou的原理，控制元素样式是否显示 display:none
+
+    <div v-show="flag">测试v-shou</div>
+    <button @click="test">点击</button>
+</div>
+
+
+
+<script>
+    var vm = new Vue({
+      el:'.app',
+        data:{
+         standard: 66,
+            flag: false
+        },
+        methods:{
+          test:function () {
+         this.flag=!this.flag;
+          }
+
+        }
+    })
+</script>
+</body>
+</html>

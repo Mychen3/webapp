@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .active{
+            border: 1px solid coral;
+            width: 100px;
+            height: 100px;
+        }
+        .error{
+            background-color:aqua;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+   <div v-bind:class='{active:isActive,error:isError}'> </div>
+        测试样式
+   <!-- 以对象方式绑定样式-->
+
+    <div v-bind:class='objClass'>
+
+        测试样式
+    </div>
+    <button @click="test">切换</button>
+</div>
+<script>
+    var vm= new Vue({
+       el:'.app',
+        data:{
+              isActive:true,
+              isError:true,
+
+            objClass:{
+                active:true,
+                error:true
+            }
+
+        },
+        methods:{
+         test:function () {
+             this.isActive = !this.isActive;
+             this.isError = !this.isError;
+             //
+              this.objClass=false;
+         }
+        }
+    });
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+         .app{
+             border-style: solid;
+             border-width: 1px;
+             /*绝对定位*/
+             position: absolute;
+             left: 50%;
+             top: 50%;
+             height: 200px;
+             width: 500px;
+             /*宽度的一半*/
+             margin-left: -250px;
+             /*高度的一半*/
+             margin-top: -100px;
+            text-align: center;
+             padding-top: 100px;
+         }
+    </style>
+</head>
+<body>
+      <div class="app">
+
+          <div>数值A<input type="text" v-model="aname"></div>
+          <div>数值B<input type="text" v-model="bname" v-on:keyup.enter="js"></div>
+          <div><input type="button" value="计算" v-on:click="js"  ></div>
+          <div>
+              <span>计算结果:</span>
+              <span v-text="sum"></span>
+          </div>
+      </div>
+<script>
+      var vm = new Vue({
+          el:'.app',
+          data:{
+           aname:'',
+           bname:'',
+              sum:''
+          },
+          methods:{
+            js:function () {
+              this.sum=parseInt(this.aname)+parseInt(this.bname);
+            }
+
+          }
+      })
+</script>
+</body>
+</html>

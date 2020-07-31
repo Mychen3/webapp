@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js" type="text/javascript"></script>
+</head>
+<body>
+ <div class="app">
+<input type="button" @click='test(123)' value="点击">
+
+
+ </div>
+
+<script>
+      var vm = new Vue({
+            el:'.app',
+          data:{
+                msg:'hallo vue',
+          },
+          methods:{
+         test:function (p) {
+             console.log(p)
+         }
+
+          }
+
+      })
+
+</script>
+</body>
+</html>

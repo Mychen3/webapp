@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+
+    <a v-bind:href=uri v-text="sname">百度</a>
+    <a :href=uri v-text="sname">百度1</a>
+
+    <button v-on:click="test">切换</button>
+</div>
+
+
+<script>
+
+    var vm=new Vue({
+        el:'.app',
+        data:{
+         uri:'http://www.baidu.com',
+         sname:'百度',
+          flag:0
+        },
+        methods:{
+            test:function () {
+                if (this.flag ==0){
+                this.uri='http://www.5chenz.com'
+                this.sname='My的博客';
+                this.flag ++;
+                    console.log(this.flag);
+                }else if(this.flag ==1){
+                    this.uri='http://www.baidu.com';
+                    this.sname='百度'
+                   this.flag --;
+                }
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

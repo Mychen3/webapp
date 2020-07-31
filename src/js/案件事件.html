@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="app">
+ <Form>
+         <!--  按键修饰符  v-on:keyup.delete清空    -->
+         <div> <input type="text" v-model="uname" v-on:keyup.delete="clear"></div>
+         <!-- 按键修饰符 v-on:keyup.enter 按回车键提交  -->
+         <div> <input type="password" v-model="pwd" v-on:keyup.enter="test"></div>
+         <div> <input type="button" value="提交" @click="test" ></div>
+         <div> <INPUT type="text" v-on:keyup.65="test1">  </div>
+ </Form>
+</div>
+<script>
+
+    var vm = new Vue({
+        el: ".app",
+        data :{
+            uname: '',
+            pwd: '',
+        },
+        methods:{
+            test:function () {
+                console.log(this.uname,this.pwd)
+            },
+            clear:function () {
+                //按delete键清空
+           this.uname= '';
+           this.pwd='';
+            },
+            test1:function (event) {
+                //查看当前按键字符
+                console.log(event.keyCode)
+            }
+        }
+    })
+
+</script>
+
+
+</body>
+</html>
