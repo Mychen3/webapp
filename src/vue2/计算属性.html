@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js">
+    </script>
+</head>
+<body>
+<div class="app">
+    <div v-text="reverseString"></div>
+</div>
+
+<script>
+    var vm= new Vue({
+      el:'.app',
+      data:{
+          msg:'你好'
+      },
+        //计算属性
+         computed:{
+             reverseString:function () {
+                 //反转
+                 return this.msg.split('').reverse().join('')
+             }
+         }
+    })
+</script>
+</body>
+</html>

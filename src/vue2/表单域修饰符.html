@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+   <!-- 转化为数值类型 .number-->
+  <input type="text" v-model.number="age">
+<!--  去掉开始和结尾的空格-->
+   <input type="text" v-model.number.trim="age1">
+
+<!--将input事件切换为change事件 失去焦点的时候变动 大多做Ajax注册页面-->
+    <input type="text" v-model.lazy="age2">
+    <div>{{age2}}</div>
+    <button @click="test">添加</button>
+    <button @click="test1">添加1</button>
+</div>
+<script>
+    var vm = new Vue({
+      el:'.app',
+      data:{
+       age: '',
+       age1:'',
+       age2:''
+      },
+      methods:{
+          test:function () {
+              console.log(this.age+13)
+          },
+          test1:function () {
+              console.log(this.age1)
+          }
+      }
+    })
+</script>
+</body>
+</html>
