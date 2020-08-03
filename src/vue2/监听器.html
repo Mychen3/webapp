@@ -15,38 +15,44 @@
         <span v-text="tip"></span>
     </div>
 </div>
-
 <script>
  /*     监听器
       1.采用监听器监听用户名的变化
       2.调用后台接口进行验证
       3.根据验证的结果调整提示信息
  */
-
     var vm=new Vue({
-        el:'app',
+        el:'.app',
         data:{
             uname:'',
-            tip:''
-
+            tip:'',
         },
         methods:{
-            checkName:function (uname) {
+            checkName: function (uname) {
+                var that = this;
                 //调用接口,但是可以使用定时任务的方式模拟接口调用
-               setTimeout(function () {
-                   //模拟接口调用
-               })
+                //setTimeout方法用于在指定的毫秒数后调用函数
+                setTimeout(function () {
+                    //模拟接口调用
+                    if (uname == 'admin') {
+                        that.tip = '用户名已存在,请更换一个';
+                    } else {
+                        that.tip = '用户名可以使用'
+                    }
+                }, 2000);
             }
         },
         //监听器
         watch:{
-            uname: function (val) {
-              //调用后台接口验证用户的合法性
-
+            //uname要监听的属性 发生变化的时候触发，
+            uname: function (uname) {
+              //调用后台接口验证用户的合法性,传参
+                this.checkName(uname);
+                //修改提示信息
+                this.tip='正在验证...';
             }
         }
     })
-
 </script>
 </body>
 </html>
