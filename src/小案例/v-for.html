@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+    <div>水果列表</div>
+    <ul>
+        <li v-for='i in fruits' v-text="i"></li>
+   <!--//遍历索引-->
+        <li v-for='(i,index) in fruits'>{{i+'----'+index}}</li>
+   <!--遍历对象  (使用的名字，遍历对象名字，遍历索引 ，key提高性能)-->
+        <li :key="i.id" v-for='(i,k,index) in objClass'>{{i}}</li>
+    </ul>
+</div>
+<script>
+    var vm = new Vue({
+      el:'.app',
+        data:{
+           fruits:['苹果','葡萄','香蕉'],
+
+           objClass:{
+                id:1,
+                uname:'zhangs',
+                age:19,
+           }
+        },
+        methods:{
+
+
+        }
+
+    })
+</script>
+</body>
+</html>

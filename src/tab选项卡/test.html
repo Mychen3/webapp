@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+       <style>
+           [v-clock]{
+               display: none;
+           }
+           *{
+               margin: 0px;
+               padding: 0px;
+               list-style: none;
+           }
+           .tab{
+               height: 400px;
+               width: 300px;
+               border: 1px solid red;
+             /* 打断换行*/
+               word-break: break-all;
+           }
+           .title{
+               display: flex;
+               flex-direction: column;
+               justify-content: space-between;
+           }
+           .title li{
+               flex: 1;
+               text-align: center;
+               line-height: 30px;
+               background-color: aquamarine;
+           }
+           .content li{
+               height: 100px;
+               display: none;
+           }
+       </style>
+</head>
+<body>
+<div class="app" v-cloak>
+    <div class="tab">
+        <ul class="title">
+            <li :key="item.id" v-for="(item,index) in list">{{item.title}}</li>
+        </ul>
+         <ul class="content">
+            <li :key="item.id" v-for="(item,index) in list"><img src="item.path"></li>
+        </ul>
+    </div>
+</div>
+<script>
+    var vm= new Vue({
+          el:'.app',
+        data:{
+              list:[{
+                 id:1,
+                 title:'苹果',
+                  path:'../tab选项卡/jnp/apple.png',
+              },
+                  {
+                      id:2,
+                      title:'橘子',
+                      path:'../tab选项卡/jnp/orange.png',
+                  },
+                  {
+                      id:3,
+                      title:'柠檬',
+                      path:'../tab选项卡/jnp/lemon.png',
+                  }]
+        },
+        methods:{
+
+        }
+    })
+</script>
+
+</body>
+</html>
