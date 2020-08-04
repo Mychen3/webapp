@@ -29,15 +29,16 @@
         },
         methods:{
             checkName: function (uname) {
-                var that = this;
+
                 //调用接口,但是可以使用定时任务的方式模拟接口调用
                 //setTimeout方法用于在指定的毫秒数后调用函数
-                setTimeout(function () {
+                //使用箭头函数是因为箭头函数完全修复了this的指向，this总是指向词法作用域，也就是外层调用者obj：
+                setTimeout(()=> {
                     //模拟接口调用
                     if (uname == 'admin') {
-                        that.tip = '用户名已存在,请更换一个';
+                        this.tip = '用户名已存在,请更换一个';
                     } else {
-                        that.tip = '用户名可以使用'
+                        this.tip = '用户名可以使用'
                     }
                 }, 2000);
             }
