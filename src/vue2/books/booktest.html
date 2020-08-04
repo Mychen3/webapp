@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="../../js/vue.js"></script>
+    <!--调用日期格式化，-->
+    <script type="text/javascript" src="../../js/time.js"></script>
     <style>
         .app{
              position: absolute;
@@ -34,7 +36,6 @@
             height: 35px;
             line-height: 35px;
         }
-
     </style>
 </head>
 <body>
@@ -44,10 +45,14 @@
             <h1>图书管理</h1>
         </div>
         <div>
+            <!--for规定绑定到哪个表单元素 -->
             <label for="id">编号</label>
-            <input type="text" id="id" v-model="id">
+                          <!--绑定flag-->
+            <input type="text" id="id" v-model="id" v-bind:disabled="flag">
             <label for="name">名称</label>
-            <input type="text"id="name" v-model="name">
+
+            <input type="text" id="name" v-model="name">
+
             <button @click="handle">提交</button>
 
         </div>
@@ -62,64 +67,106 @@
      </tr>
       </thead>
       <tbody>
-      <tr :key="item.id" v-for=" item in books">
+      <tr :key="item.id" v-for="item in books">
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
-          <td>item.date</td>
+          <td>{{item.date | format('yyyy-MM-dd hh:mm:ss')}}</td>
           <td>
               <!--  禁止A标签的默认行为-->
-              <a href="#" @click.prevent>修改</a>
+              <a href="#" @click.prevent="upd(item.id)">修改</a>
               <span>|</span>
-              <a href="#" @click.prevent>删除</a>
+              <a href="#" @click.prevent="delboot(item.id)">删除</a>
           </td>
       </tr>
       </tbody>
   </table>
     </div>
 </div>
-
       <script>
+           //调用过滤器   value ==提供要处理的数据 ,agr传处理出来的格式  format('yyyy-MM-dd hh:mm:ss')
+           Vue.filter('format',function (value,agr){
+               //调用外部格式化日期函数
+               return dateFormat(value, agr);
+           });
            new Vue({
                el:'.app',
                data:{
+                   id:'',
+                   name:'',
+                   flag:false,
                  books:[{
                      id:'1',
                      name:'三国演义',
-                     date:''
+                     date:'1596538816000'
                  },
                      {
                          id:'2',
                          name:'水浒传',
-                         date:''
+                         date:'1596538816000'
                      },
                      {
                          id:'3',
                          name:'红楼梦',
-                         date:''
+                         date:'1596538816000'
                      },
                      {
                          id:'4',
                          name:'西游记',
-                         date:''
+                         date:'1596538816000'
                      },]
                },
-               methods:{
-                   handle:function () {
-                     //添加图书，创建一个对象接收传过来的id和name，再赋值给对象属性
-                       var book ={};
-                       book.id=this.id;
-                       book.name=this.name;
-                       book.date="";
+               methods: {
+                   handle: function () {
+                       if (this.flag) {
+                           //编辑操作
+                           //根据当前的id去更新数组中对应的数据
+                           for (var i = 0; 1 < this.books.length; i++) {
+                               if (this.id == this.books[i].id) {
+                                   this.books[i].name = this.name;
+                                   return true;
+                               }
+                           }
+                           this.flag=false;
+                       }
+                        else {
+                       //添加图书，创建一个对象接收传过来的id和name，再赋值给对象属性
+                       var book = {};
+                       book.id = this.id;
+                       book.name = this.name;
+                       book.date = "";
                        // 最后添加到数组
                        this.books.push(book);
                        //清空表单
-                       this.id="";
-                       this.name="";
+                           this.id = "";
+                           this.name = "";
+                       }
 
-
+                       this.id = "";
+                       this.name = "";
+                   },
+                   upd: function (id) {
+                       //禁止修改id
+                       this.flag=true;
+                       //循环遍历出来id
+                       for (var i = 0; i < this.books.length; i++) {
+                           //判断传过来的id是否于数组里面的id相等
+                           if (id == this.books[i].id){
+                               //然后赋值给文本框
+                               this.id=this.books[i].id;
+                               this.name=this.books[i].name;
+                           }
+                       }
+                   },
+                   delboot:function (id) {
+                       //删除图书
+                       //根据id从数组中查找元素的索引
+                       var index = this.books.findIndex(function(item){
+                           return item.id ==id;
+                       });
+                       this.books.splice(index,1);
                    }
-               }
-           })
+           },
+           });
       </script>
 </body>
 </html>
