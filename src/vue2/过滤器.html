@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+  <!--调用日期格式化，-->
+    <script type="text/javascript" src="../js/time.js"></script>
+</head>
+<body>
+<div class="app">
+<div>{{date | format('yyyy-MM-dd hh:mm:ss')}}</div>
+</div>
+<script>
+    // Vue.filter('format',function (value,arg) {
+    //    if (arg=='yyyy-mm-dd'){
+    //        var ret='';
+    //                     //年    月     日
+    //        ret += value.getFullYear()+'-'+(value.getMonth()+1)+"-"+value.getDate();
+    //    }
+    //         return ret;
+    // });              value ==提供要处理的数据 agr 处理出来的格式
+    Vue.filter('format',function (value,agr){
+        //调用外部格式化日期函数
+        return dateFormat(value, agr);
+    });
+    new Vue({
+       el:'.app',
+        data:{
+            date: new Date()
+        }
+    })
+</script>
+</body>
+</html>

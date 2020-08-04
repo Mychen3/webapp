@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+    <style>
+        .app{
+             position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px dashed bisque;
+            width: 600px;
+            height: 500px;
+            text-align: center;
+            margin: auto;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .tableCss  {
+           width: 600px;
+        }
+        .tableCss th {
+            background-color:burlywood ;
+            height: 50px;
+        }
+        .tableCss tr td{
+            padding: 10px;
+            border: 1px dashed orange;
+            height: 35px;
+            line-height: 35px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="app">
+    <div>
+        <div>
+            <h1>图书管理</h1>
+        </div>
+        <div>
+            <label for="id">编号</label>
+            <input type="text" id="id" v-model="id">
+            <label for="name">名称</label>
+            <input type="text"id="name" v-model="name">
+            <button @click="handle">提交</button>
+
+        </div>
+
+  <table class="tableCss" rules="none">
+      <thead >
+     <tr>
+         <th>编号</th>
+         <th>名称</th>
+         <th>时间</th>
+         <th>操作</th>
+     </tr>
+      </thead>
+      <tbody>
+      <tr :key="item.id" v-for=" item in books">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>item.date</td>
+          <td>
+              <!--  禁止A标签的默认行为-->
+              <a href="#" @click.prevent>修改</a>
+              <span>|</span>
+              <a href="#" @click.prevent>删除</a>
+          </td>
+      </tr>
+      </tbody>
+  </table>
+    </div>
+</div>
+
+      <script>
+           new Vue({
+               el:'.app',
+               data:{
+                 books:[{
+                     id:'1',
+                     name:'三国演义',
+                     date:''
+                 },
+                     {
+                         id:'2',
+                         name:'水浒传',
+                         date:''
+                     },
+                     {
+                         id:'3',
+                         name:'红楼梦',
+                         date:''
+                     },
+                     {
+                         id:'4',
+                         name:'西游记',
+                         date:''
+                     },]
+               },
+               methods:{
+                   handle:function () {
+                     //添加图书，创建一个对象接收传过来的id和name，再赋值给对象属性
+                       var book ={};
+                       book.id=this.id;
+                       book.name=this.name;
+                       book.date="";
+                       // 最后添加到数组
+                       this.books.push(book);
+                       //清空表单
+                       this.id="";
+                       this.name="";
+
+
+                   }
+               }
+           })
+      </script>
+</body>
+</html>
