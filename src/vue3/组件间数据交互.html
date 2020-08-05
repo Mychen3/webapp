@@ -13,11 +13,11 @@
     <menu-app v-bind:title="haha" v-bind:pbun="12"></menu-app>
 </div>
 
-
     <script>
         Vue.component('menu-app',{
             //接收父组件传过来的值
             props:['title','pbun'],
+            //组件的data必须是函数
              data:function () {
                  return{
                     msg:'子组件本身的数据',
@@ -27,7 +27,6 @@
                      <div>
                      <div>{{msg+'-------'+title}}</div>
                          <div>{{pbun}}</div>
-
                      </div>
                      `
         });
