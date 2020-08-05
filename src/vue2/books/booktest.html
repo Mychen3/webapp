@@ -46,15 +46,14 @@
         </div>
         <div>
             <!--for规定绑定到哪个表单元素 -->
-            <label for="id">编号</label>
+            <label for="id" v-focus="">编号</label>
                           <!--绑定flag-->
-            <input type="text" id="id" v-model="id" v-bind:disabled="flag">
+            <input type="text" id="id" v-model="id" v-bind:disabled="flag" v-focus >
             <label for="name">名称</label>
 
-            <input type="text" id="name" v-model="name">
+            <input type="text" id="name" v-model="name" >
 
-            <button @click="handle">提交</button>
-
+            <button @click="handle" v-bind:disabled="test" >提交</button>
         </div>
 
   <table class="tableCss" rules="none">
@@ -83,6 +82,14 @@
     </div>
 </div>
       <script>
+          //自定义指令
+          Vue.directive( 'focus',{
+              // 当被绑定的元素插入到 DOM 中时……
+              inserted: function (el) {
+                  //聚焦函数
+                  el.focus()
+              }
+          });
            //调用过滤器   value ==提供要处理的数据 ,agr传处理出来的格式  format('yyyy-MM-dd hh:mm:ss')
            Vue.filter('format',function (value,agr){
                //调用外部格式化日期函数
@@ -94,25 +101,27 @@
                    id:'',
                    name:'',
                    flag:false,
+                   test:false,
+                   date: new Date(),
                  books:[{
                      id:'1',
                      name:'三国演义',
-                     date:1596538816000
+                     date:new Date(),
                  },
                      {
                          id:'2',
                          name:'水浒传',
-                         date:1596538816000
+                         date:new Date()
                      },
                      {
                          id:'3',
                          name:'红楼梦',
-                         date:1596538816000
+                         date:new Date()
                      },
                      {
                          id:'4',
                          name:'西游记',
-                         date:1596538816000
+                         date:new Date()
                      },]
                },
                methods: {
@@ -133,7 +142,7 @@
                        var book = {};
                        book.id = this.id;
                        book.name = this.name;
-                       book.date = "";
+                       book.date = this.date;
                        // 最后添加到数组
                        this.books.push(book);
                        //清空表单
@@ -164,8 +173,31 @@
                            return item.id ==id;
                        });
                        this.books.splice(index,1);
+                   },
+
+                   Verify:function (uname) {
+                       for (var i = 0; i < this.books.length; i++)
+                       {
+                          if (uname === this.books[i].name)
+                          {
+                              this.test = true;
+
+                          }
+                          else {
+                              this.test =false;
+                          }
+                       }
                    }
-           },
+               },
+               //监听器
+               watch:{
+                   //监听name属性
+                  name:function (uname) {
+                      //验证图书名称是或存在
+                      //调用一下验证图书的方法
+                         this.Verify(uname);
+                  }
+               }
            });
       </script>
 </body>
