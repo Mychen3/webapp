@@ -9,23 +9,26 @@
 <div class="app">
   <div>{{pmsg}}</div>
         <!-- 动态绑定属性传给子组件-->
-    <menu-app v-bind:title="haha"></menu-app>
+
+    <menu-app v-bind:title="haha" v-bind:pbun="12"></menu-app>
 </div>
 
 
-
     <script>
-
         Vue.component('menu-app',{
             //接收父组件传过来的值
-            props:['title'],
+            props:['title','pbun'],
              data:function () {
                  return{
                     msg:'子组件本身的数据',
                  }
              },
             template:`
+                     <div>
                      <div>{{msg+'-------'+title}}</div>
+                         <div>{{pbun}}</div>
+
+                     </div>
                      `
         });
         new Vue({
