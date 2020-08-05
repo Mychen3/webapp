@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+  <div>{{pmsg}}</div>
+        <!-- 动态绑定属性传给子组件-->
+    <menu-app v-bind:title="haha"></menu-app>
+</div>
+
+
+
+    <script>
+
+        Vue.component('menu-app',{
+            //接收父组件传过来的值
+            props:['title'],
+             data:function () {
+                 return{
+                    msg:'子组件本身的数据',
+                 }
+             },
+            template:`
+                     <div>{{msg+'-------'+title}}</div>
+                     `
+        });
+        new Vue({
+            el:'.app',
+            data:{
+                pmsg:'父组件中的内容',
+                haha:'动态绑定属性'
+
+            }
+        })
+    </script>
+</body>
+</html>

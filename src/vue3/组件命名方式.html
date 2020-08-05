@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+    <name-test></name-test>
+</div>
+<script>
+    //如果使用驼峰命名组件，只能在字符串模板中用驼峰的方式使用，但是在普通的标签模板中，必须使用短横线的方式使用组件
+Vue.component('name-test',{
+     data: function () {
+             return {
+                 msg:'helloWorld'
+         }
+     },
+    template:`
+       <div v-text="msg"></div>
+       `,
+    methods:{
+    }})
+    new Vue({
+      el:'.app',
+      data:{
+
+      }
+    })
+</script>
+</body>
+</html>

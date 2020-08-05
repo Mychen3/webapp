@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app" >
+    <test-com></test-com>
+</div>
+<script>
+    new Vue({
+        el:'.app',
+        data:{
+        },
+        components: {
+          'test-com': {
+              data:function(){
+                  return{
+                      msg: 'Helloword'
+                  }
+              },
+                template: `<div>{{ msg}}</div>`,
+          }
+        }
+    });
+</script>
+</body>
+</html>
