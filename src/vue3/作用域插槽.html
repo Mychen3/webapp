@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style type="text/css">
+        .syt{
+            color: #59ea7d;
+        }
+    </style>
+</head >
+<body>
+  <div class="app">
+   <test-mod v-bind:list="list"> </test-mod>
+<!--      //父组件填充-->
+      <template slot-scope="slotName">
+          <strong class="syt">{{slotName.info.name}}</strong>
+      </template>
+  </div>
+  <script>
+
+      Vue.component('test-mod',{
+          props:['list'],
+           data: function () {
+                  return{
+                  }
+           },
+          template:`
+              <div>
+                  <li :key="item.id" v-for="item in list">
+                      <slot v-bind:info="item">{{item.name}}</slot>
+                  </li>
+              </div>
+          `,
+      })
+      new Vue({
+           el:'.app',
+          data:{
+               list:[{
+                   id:1,
+                   name:'apple',
+               },
+                   {
+                       id:2,
+                       name:'orange',
+                   },
+                   {
+                       id: 3,
+                       name: 'banana'
+                   }]
+          }
+      })
+  </script>
+</body>
+</html>

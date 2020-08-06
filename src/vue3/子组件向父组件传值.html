@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+    <br>
+<menu-item v-bind:parr="parr" @zd-text="handle"  v-bind:msg="msg"></menu-item>
+
+<div  v-bind:style="{fontSize:fontsize+'px'}">{{msg}} </div>
+</div>
+
+                <script>
+                    Vue.component('menu-item',{
+                        props:['parr','msg'],
+                        data: function () {
+                           return{
+                               //写子组件本身的数据
+                           }
+                        },
+                        template:`
+                     <div>
+                         <ui>
+                             <li :key="index" v-for="(item,index) in parr ">{{item}}</li>
+
+                             <button @click='$emit("zd-text")'>扩大父组件中的字体大小</button>
+                             <br>
+                             <span >{{msg+'----'+'子组件调用'}}</span>
+                         </ui>
+                     </div>
+                        `,
+                    })
+                    new Vue({
+                        el:'.app',
+                        data:{
+                            parr:['苹果','葡萄','香蕉'],
+                            fontsize:10,
+                            msg:'父类组件的属性'
+                        },
+                        methods:{
+                            handle:function () {
+                              //扩大自己字体大小
+                               this.fontsize += 5;
+                            }
+                        }
+                    });
+                </script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+    <button @click="test">销毁</button>
+  <test-tom></test-tom>
+    <test-jerry></test-jerry>
+
+</div>
+
+<script>
+
+   //提供事件中心
+   var hub=new Vue();
+
+
+    Vue.component('test-tom',{
+        data: function () {
+            return {
+              num:0,
+        }
+    },
+    template:`
+            <div>
+                <div>TOM:{{num}}</div>
+               <div>
+                   <button @click="test">点击</button>
+               </div>
+            </div>
+    `,
+        methods:{
+            test:function () {
+                //触发兄弟组件的事件
+                hub.$emit('jerry-event',2)
+            }
+        },
+        mounted:function () {
+            //监听事件
+            hub.$on('tom-event',(val)=> {
+          this.num += val;
+            });
+        }
+    });
+
+    Vue.component('test-jerry',{
+        data: function () {
+            return {
+                num:0,
+            }
+        },
+        template:`
+            <div>
+                <div>jerry:{{num}}</div>
+              <div> <button @click="test">点击</button></div>
+            </div>
+    `,
+        methods:{
+            test:function () {
+        //触发兄弟组件的事件
+                hub.$emit('tom-event',1)
+            }
+        },
+        mounted:function () {
+            //监听事件
+            hub.$on('jerry-event',(val)=> {
+                this.num += val;
+            });
+        }
+    })
+    new Vue({
+        el:'.app',
+        data:{
+
+        },
+        methods:{
+            //销毁事件
+            test:function () {
+                hub.$off('jerry-event');
+                hub.$off('tom-event');
+            }
+   }
+    })
+</script>
+</body>
+</html>

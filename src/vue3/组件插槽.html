@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+    <test-mod>有bug发生</test-mod>
+    <test-mod>不可能吧！</test-mod>
+    <test-mod></test-mod>
+</div>
+<script>
+    Vue.component('test-mod',{
+           data: function () {
+          return{
+          }
+           },
+        template:`
+                <div>
+                    <strong>ERROR:</strong>
+                    <h5>成功</h5>
+                     <slot></slot>
+                </div>
+                     `,
+    })
+    new Vue({
+        el:'.app',
+        data:{
+
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+     <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div class="app">
+    <test-mod>
+        <P slot="header">标题信息</P>
+        <p>主要内容1</p>
+        <p>主要内容2</p>
+        <P slot="footer">底部信息</P>
+
+    </test-mod>
+
+</div>
+ <script>
+
+
+     Vue.component('test-mod',{
+           data: function () {
+          return{
+
+          }
+           },
+         template:`
+               <div>
+                   <header>
+                      <slot name='header'></slot>
+                   </header>
+                   <main>
+                       <slot> </slot>
+                   </main>
+                   <footer>
+                       <slot name="footer"> </slot>
+                   </footer>
+               </div>
+         `,
+
+     })
+     new Vue({
+            el:'.app',
+            data:{
+
+         }
+
+
+     })
+
+ </script>
+</body>
+</html>
