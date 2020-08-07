@@ -4,10 +4,53 @@
     <meta charset="UTF-8">
     <title>Title</title>
      <script src="../../js/vue.js"></script>
-     <style>   </style>
+     <style>
+
+         *{
+             padding: 0;
+             margin: 0;
+         }
+
+       .haDe{
+           display: flex;
+           /*居中对齐*/
+           align-items: center;
+           border: 1px solid red;
+          max-width: 400px;
+           height: 300px;
+           margin: 0 auto;
+           flex-direction: column;
+       }
+         .ted{
+             text-align: center;
+             background-color: cyan;
+             height: 30px;
+             width: 400px;
+             line-height: 30px;
+         }
+         .tup img{
+             height: 40px;
+             width: 40px;
+         }
+         .tup{
+             display: flex;
+             width: 400px;
+             flex: 2;
+         }
+     </style>
 </head>
 <body>
-<div>
+<div class="app">
+     <div class="haDe">
+          <div class="ted">我的商品</div>
+            <div class="tup"><img src="img/a.jpg">
+            <div><button></button></div>
+            </div>
+
+
+
+     </div>
+
 
 
 </div>
