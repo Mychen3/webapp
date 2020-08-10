@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/axios.js"></script>
+</head>
+<body>
+<script>
+    axios.get('后台接口/地址').then(function (ret) {
+        //data属性是固定的用法,用于获取后台的实际数据
+        console.log(ret.data)
+    })
+
+    //params get请求传参
+    axios.get('后台接口/地址',{
+        params:{
+            id:789
+        }
+    }).then(function (ret) {
+        console.log(ret.date);
+    })
+
+    //post请求 传递参数
+    axios.post('后台接口/地址',{
+      uname:'list',
+      pwd:'123'
+    }).then(function (ret ) {
+        console.log(ret.data)
+    })
+
+    //put请求
+    axios.put('后台接口/地址',{
+        uname:'list',
+        pwd:'123'
+    }).then(function (ret) {
+        console.log(ret.data)
+    })
+
+
+
+</script>
+
+</body>
+</html>
