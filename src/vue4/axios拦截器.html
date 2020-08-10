@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/axios.js"></script>
+</head>
+<body>
+<script>
+ axios.interceptors.request.use(function (config) {
+     config.headers.mytoken='nihao'
+    return config;
+ },function (err) {
+     console.log(err)
+ })
+ axios.get('后台接口/地址').then(function (data) {
+     //data属性是固定的用法,用于获取后台的实际数据
+     console.log(data)
+ })
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/axios.js"></script>
+
+</head>
+<body>
+<script>
+    //配置请求的基准URL地址
+    axios.default.baseURI='请求地址';
+
+    //配置请求头信息
+    axios.defaults.headers['mytoken']='hello';
+
+    axios.get('/地址').then(function (ret) {
+        console.log(ret.data);
+    })
+
+
+
+
+</script>
+
+</body>
+</html>
